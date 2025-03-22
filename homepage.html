@@ -1,0 +1,123 @@
+<html>
+<head>
+    <title>Blood Bank Management System</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #ffe6e6;
+        }
+        .navbar {
+            overflow: hidden;
+            background-color: #cc0000;
+            color: white;
+            padding: 1rem;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+        .navbar a:hover {
+            background-color: #990000;
+        }
+        .container {
+            padding: 2rem;
+        }
+        .hero {
+            background-color: #ff9999;
+            padding: 2rem;
+            text-align: center;
+            color: #cc0000;
+        }
+        .hero h1 {
+            margin: 0;
+            font-size: 3rem;
+        }
+        .content {
+            margin: 2rem 0;
+        }
+        .footer {
+            background-color: #cc0000;
+            color: white;
+            text-align: center;
+            padding: 0.5rem;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+        .success-message {
+            background-color: #ccffcc;
+            color: #006600;
+            padding: 1rem;
+            margin-top: 1rem;
+            border: 1px solid #006600;
+            text-align: center;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="homepage.html">Home</a>
+        <a href="donorregister.html">Donor's Login</a>
+        <a href="inventory.html">Inventory</a>
+        <a href="recipientregister.html">Recipient's Login</a>
+        <a href="aboutus.html">About Us</a>
+        <a href="contactus.html">Contact Us</a>
+    </div>
+
+    <div class="hero">
+        <h1>Welcome to Blood Bank Management System</h1>
+        <p>Give The Gift Of Life: Donate Blood</p>
+    </div>
+
+    <div class="container">
+        <div class="content" id="home">
+            <h2>Home</h2>
+            <p>Welcome to our Blood Bank Management System. We aim to provide efficient and effective management of blood donations, requests, and inventory to save lives.</p>
+        </div>
+        <div class="content" id="donors">
+            <h2>Donors</h2>
+            <p>Register as a donor and help save lives. Your donation can make a difference.</p>
+        </div>
+        <div class="content" id="inventory">
+            <h2>Inventory</h2>
+            <p>Manage blood inventory efficiently to maintain an adequate supply of all blood types.</p>
+        </div>
+        <div class="content" id="recipients">
+            <h2>Recipients</h2>
+            <p>Details about recipients and their needs. If you are a donor, you will be notified when your blood has been given to a recipient.</p>
+        </div>
+        <div class="content" id="about">
+            <h2>About Us</h2>
+            <p>Learn more about our mission, vision, and the team behind our blood bank management system.</p>
+        </div>
+        <div class="content" id="contact us">
+            <h2>Contact</h2>
+            <p>Get in touch with us for any queries or support. We are here to help you.</p>
+        </div>
+        <div class="success-message" id="successMessage">
+            Thank you! Your blood donation has successfully been given to a recipient.
+        </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2024 Blood Bank Management System. All rights reserved.
+    </div>
+
+    <script>
+        
+        function notifyDonor() {
+            var successMessage = document.getElementById('successMessage');
+            successMessage.style.display = 'block';
+        }
+
+        
+        setTimeout(notifyDonor, 3000);
+    </script>
+</body>
+</html>
