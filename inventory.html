@@ -1,0 +1,224 @@
+
+<html>
+<head>
+    <title>Donor Data - Blood Bank Management System</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #ffe6e6;
+            color: #333;
+            display: none; /* Initially hide the body */
+        }
+        .navbar {
+            overflow: hidden;
+            background-color: #b30000;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            width: 100%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .navbar a:hover {
+            background-color: #990000;
+        }
+        .container {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        .hero {
+            background-color: #ff9999;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            width: 100%;
+        }
+        .hero h1 {
+            font-size: 2.5rem;
+            margin: 0;
+        }
+        .table-container {
+            background-color: white;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            flex: 1;
+            min-width: 300px;
+            max-width: 100%;
+            overflow-x: auto;
+        }
+        .table-container h2 {
+            color: #b30000;
+            margin-bottom: 1rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+        }
+        th {
+            background-color: #b30000;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .footer {
+            background-color: #b30000;
+            color: white;
+            text-align: center;
+            padding: 0.5rem;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="homepage.html">Home</a>
+        <a href="donorregister.html">Donor's Login</a>
+        <a href="inventory.html">Inventory</a>
+        <a href="recipientregister.html">Recipient's Login</a>
+        <a href="aboutus.html">About Us</a>
+        <a href="contactus.html">Contact Us</a>
+    </div>
+
+    <div class="hero">
+        <h1>Donor Data</h1>
+        <p>List of registered donors and blood stock.</p>
+    </div>
+
+    <div class="container">
+        <div class="table-container">
+            <h2>Registered Donors</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Full Name</th>
+                        <th>Email</th>
+                        <th>Address</th>
+                        <th>Contact Number</th>
+                        <th>City</th>
+                        <th>State</th>
+                        <th>Blood Group</th>
+                        <th>Haemoglobin Level (g/dL)</th>
+                        <th>Blood Sugar Level (mg/dL)</th>
+                        <th>Blood Pressure Level (mm/Hg)</th>
+                        <th>RBC Count (million/µL)</th>
+                        <th>WBC Count (million/µL)</th>
+                        <th>Plasma Count (in %)</th>
+                        <th>Water Content (in %)</th>
+                        <th>STD</th>
+                        <th>Age</th>
+                        <th>Past Medical History</th>
+                    </tr>
+                </thead>
+                <tbody id="donorTableBody">
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="table-container">
+            <h2>Blood Stock</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Blood Type</th>
+                        <th>Stock Available</th>
+                        <th>Expiry Date</th>
+                    </tr>
+                </thead>
+                <tbody id="stockTableBody">
+                    <tr>
+                        <td>A+</td>
+                        <td>10 units</td>
+                        <td>2024-08-15</td>
+                    </tr>
+                    <tr>
+                        <td>B+</td>
+                        <td>15 units</td>
+                        <td>2024-08-20</td>
+                    </tr>
+                    <tr>
+                        <td>O-</td>
+                        <td>5 units</td>
+                        <td>2024-08-25</td>
+                    </tr>
+                    <tr>
+                        <td>AB+</td>
+                        <td>7 units</td>
+                        <td>2024-08-30</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2024 Blood Bank Management System. All rights reserved.
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const password = prompt("Please enter the password to access this page:");
+            const correctPassword = "123"; // Set your password here
+
+            if (password === correctPassword) {
+                document.body.style.display = "block"; // Show the body content
+            } else {
+                alert("Incorrect password. You will be redirected.");
+                window.location.href = "http://example.com"; // Redirect to another page or site
+            }
+
+            const donors = JSON.parse(localStorage.getItem('donors')) || [];
+            const donorTableBody = document.getElementById('donorTableBody');
+            donors.forEach(donor => {
+                const row = document.createElement('tr');
+                Object.values(donor).forEach(value => {
+                    const cell = document.createElement('td');
+                    cell.textContent = value;
+                    row.appendChild(cell);
+                });
+                donorTableBody.appendChild(row);
+            });
+
+            const stock = JSON.parse(localStorage.getItem('stock')) || [
+                { bloodType: 'A+', stock: '10 units', expiryDate: '2024-08-15' },
+                { bloodType: 'B+', stock: '15 units', expiryDate: '2024-08-20' },
+                { bloodType: 'O-', stock: '5 units', expiryDate: '2024-08-25' },
+                { bloodType: 'AB+', stock: '7 units', expiryDate: '2024-08-30' }
+            ];
+            const stockTableBody = document.getElementById('stockTableBody');
+            stock.forEach(item => {
+                const row = document.createElement('tr');
+                Object.values(item).forEach(value => {
+                    const cell = document.createElement('td');
+                    cell.textContent = value;
+                    row.appendChild(cell);
+                });
+                stockTableBody.appendChild(row);
+            });
+        });
+    </script>
+</body>
+</html>

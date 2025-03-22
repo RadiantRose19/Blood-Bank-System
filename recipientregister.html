@@ -1,0 +1,388 @@
+<html>
+<head>
+    <title>Blood Bank Management System - Recipients</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #ffe6e6;
+        }
+        .navbar {
+            overflow: hidden;
+            background-color: #cc0000;
+            color: white;
+            padding: 1rem;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+        .navbar a:hover {
+            background-color: #990000;
+        }
+        .container {
+            padding: 2rem;
+        }
+        .content {
+            margin: 2rem 0;
+        }
+        .form-container {
+            margin-bottom: 2rem;
+            background-color: #fff;
+            padding: 1rem;
+            border: 1px solid #cc0000;
+            border-radius: 5px;
+        }
+        .form-container h3 {
+            margin-top: 0;
+        }
+        .form-container input, .form-container select {
+            width: 100%;
+            padding: 0.5rem;
+            margin: 0.5rem 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .form-container button {
+            background-color: #cc0000;
+            color: white;
+            padding: 0.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .form-container button:hover {
+            background-color: #990000;
+        }
+        .success-message {
+            background-color: #ccffcc;
+            color: #006600;
+            padding: 1rem;
+            margin-top: 1rem;
+            border: 1px solid #006600;
+            text-align: center;
+            display: none;
+        }
+        .match-message {
+            background-color: #ffffcc;
+            color: #996600;
+            padding: 1rem;
+            margin-top: 1rem;
+            border: 1px solid #996600;
+            text-align: center;
+            display: none;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 2rem;
+        }
+        table, th, td {
+            border: 1px solid #cc0000;
+        }
+        th, td {
+            padding: 1rem;
+            text-align: left;
+        }
+        th {
+            background-color: #cc0000;
+            color: white;
+        }
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.5);
+            padding-top: 60px;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 10px;
+        }
+        .modal-header {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .modal-body {
+            font-size: 1.2rem;
+        }
+        .modal-close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .modal-close:hover,
+        .modal-close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .accept-button {
+            background-color: #006600;
+            color: white;
+            padding: 0.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .accept-button:hover {
+            background-color: #004d00;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="homepage.html">Home</a>
+        <a href="donorregister.html">Donors</a>
+        <a href="inventory.html">Inventory</a>
+        <a href="recipientregister.html">Recipients</a>
+        <a href="aboutus.html">About Us</a>
+        <a href="contactus.html">Contact Us</a>
+    </div>
+
+    <div class="container">
+        <div class="content">
+            <h2>Recipients</h2>
+            <p>Details about recipients and their needs. If you are a donor, you will be notified when your blood has been given to a recipient.</p>
+            <div class="match-message" id="matchMessage">
+                We have found a matching blood type for the recipient.
+            </div>
+            <div class="success-message" id="successMessage">
+                Thank you! Your blood donation has successfully been given to a recipient.
+            </div>
+            <div class="form-container">
+                <h3>Enter Recipient Information</h3>
+                <form id="recipientForm">
+                    <label for="recipientName">Recipient Name:</label>
+                    <input type="text" id="recipientName" name="recipientName" required>
+
+                    <label for="bloodType">Blood Type:</label>
+                    <select id="bloodType" name="bloodType" required>
+                        <option value="A+">A+</option>
+                        <option value="A-">A-</option>
+                        <option value="B+">B+</option>
+                        <option value="B-">B-</option>
+                        <option value="AB+">AB+</option>
+                        <option value="AB-">AB-</option>
+                        <option value="O+">O+</option>
+                        <option value="O-">O-</option>
+                    </select>
+
+                    <label for="hospital">Hospital:</label>
+                    <input type="text" id="hospital" name="hospital" required>
+
+                    <label for="dateNeeded">Date Needed:</label>
+                    <input type="date" id="dateNeeded" name="dateNeeded" required>
+
+                    <label for="amountNeeded">Amount of Blood Needed (units):</label>
+                    <input type="number" id="amountNeeded" name="amountNeeded" min="1" required>
+
+                    <label for="serumCrossMatch">Serum Cross-Match:</label>
+                    <input type="text" id="serumCrossMatch" name="serumCrossMatch" required>
+
+                    <button type="submit">Add Recipient</button>
+                </form>
+            </div>
+            <table id="recipientsTable">
+                <tr>
+                    <th>Recipient Name</th>
+                    <th>Blood Type</th>
+                    <th>Hospital</th>
+                    <th>Date Needed</th>
+                    <th>Amount of Blood Needed</th>
+                    <th>Serum Cross-Match</th>
+                    <th>Donation Status</th>
+                    <th>Action</th>
+                </tr>
+                <tr>
+                    <td>John Doe</td>
+                    <td>A+</td>
+                    <td>City Hospital</td>
+                    <td>2024-07-10</td>
+                    <td>2 units</td>
+                    <td>Compatible</td>
+                    <td>Pending</td>
+                    <td><button class="accept-button">Accept Request</button></td>
+                </tr>
+                <tr>
+                    <td>Jane Smith</td>
+                    <td>B-</td>
+                    <td>General Hospital</td>
+                    <td>2024-07-15</td>
+                    <td>3 units</td>
+                    <td>Compatible</td>
+                    <td>Completed</td>
+                    <td></td>
+                </tr>
+                <!-- Add more rows as needed -->
+            </table>
+        </div>
+    </div>
+
+    <!-- The Modal -->
+    <div id="requestModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <div class="modal-header">Blood Request</div>
+            <div class="modal-body" id="modalBody"></div>
+            <div class="modal-footer">
+                <button id="confirmAcceptButton" class="accept-button">Confirm Accept</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to add a new recipient to the table
+        document.getElementById('recipientForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            var recipientName = document.getElementById('recipientName').value;
+            var bloodType = document.getElementById('bloodType').value;
+            var hospital = document.getElementById('hospital').value;
+            var dateNeeded = document.getElementById('dateNeeded').value;
+            var amountNeeded = document.getElementById('amountNeeded').value;
+            var serumCrossMatch = document.getElementById('serumCrossMatch').value;
+
+            var table = document.getElementById('recipientsTable');
+            var newRow = table.insertRow();
+
+            var cell1 = newRow.insertCell(0);
+            var cell2 = newRow.insertCell(1);
+            var cell3 = newRow.insertCell(2);
+            var cell4 = newRow.insertCell(3);
+            var cell5 = newRow.insertCell(4);
+            var cell6 = newRow.insertCell(5);
+            var cell7 = newRow.insertCell(6);
+            var cell8 = newRow.insertCell(7);
+
+            cell1.textContent = recipientName;
+            cell2.textContent = bloodType;
+            cell3.textContent = hospital;
+            cell4.textContent = dateNeeded;
+            cell5.textContent = amountNeeded + ' units';
+            cell6.textContent = serumCrossMatch;
+            cell7.textContent = 'Pending';
+            cell8.innerHTML = '<button class="accept-button">Accept Request</button>';
+
+            // Reset the form
+            document.getElementById('recipientForm').reset();
+
+            // Simulate finding a matching blood type
+            notifyMatch();
+
+            // Show the request pop-up with the latest recipient's details
+            showRequestPopup(recipientName, bloodType, hospital, dateNeeded, amountNeeded, serumCrossMatch);
+        });
+
+        // Simulate finding a matching blood type
+        function notifyMatch() {
+            var matchMessage = document.getElementById('matchMessage');
+            matchMessage.style.display = 'block';
+            setTimeout(function() {
+                matchMessage.style.display = 'none';
+            }, 5000);
+        }
+
+        // Simulate a donation notification for demonstration purposes
+        function notifyDonor() {
+            var successMessage = document.getElementById('successMessage');
+            successMessage.style.display = 'block';
+        }
+
+        // Call the notifyDonor function to display the success message
+        // In a real application, this would be triggered by the backend after a successful donation
+        setTimeout(notifyDonor, 3000); // Simulate a delay before notification
+
+        // Function to show the request pop-up with the latest recipient's details
+        function showRequestPopup(name, bloodType, hospital, dateNeeded, amountNeeded, serumCrossMatch) {
+            var modal = document.getElementById('requestModal');
+            var modalBody = document.getElementById('modalBody');
+
+            modalBody.innerHTML = `
+                <p><strong>Recipient Name:</strong> ${name}</p>
+                <p><strong>Blood Type:</strong> ${bloodType}</p>
+                <p><strong>Hospital:</strong> ${hospital}</p>
+                <p><strong>Date Needed:</strong> ${dateNeeded}</p>
+                <p><strong>Amount of Blood Needed:</strong> ${amountNeeded} units</p>
+                <p><strong>Serum Cross-Match:</strong> ${serumCrossMatch}</p>
+            `;
+
+            modal.style.display = 'block';
+        }
+
+        // Get the modal
+        var modal = document.getElementById('requestModal');
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName('modal-close')[0];
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = 'none';
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // Function to handle the Accept Request button click
+        document.getElementById('recipientsTable').addEventListener('click', function(event) {
+            if (event.target.classList.contains('accept-button')) {
+                var row = event.target.closest('tr');
+                var recipientName = row.cells[0].textContent;
+                var bloodType = row.cells[1].textContent;
+                var hospital = row.cells[2].textContent;
+                var dateNeeded = row.cells[3].textContent;
+                var amountNeeded = row.cells[4].textContent.replace(' units', '');
+                var serumCrossMatch = row.cells[5].textContent;
+
+                // Show the request pop-up with the recipient's details
+                showRequestPopup(recipientName, bloodType, hospital, dateNeeded, amountNeeded, serumCrossMatch);
+
+                // Store the row to update the status later
+                rowToUpdate = row;
+            }
+        });
+
+        var rowToUpdate;
+
+        // Confirm accept request
+        document.getElementById('confirmAcceptButton').addEventListener('click', function() {
+            if (rowToUpdate) {
+                rowToUpdate.cells[6].textContent = 'Completed';
+                rowToUpdate.cells[7].innerHTML = '';
+
+                // Display success message
+                var successMessage = document.getElementById('successMessage');
+                successMessage.style.display = 'block';
+                setTimeout(function() {
+                    successMessage.style.display = 'none';
+                }, 5000);
+
+                // Hide modal
+                var modal = document.getElementById('requestModal');
+                modal.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

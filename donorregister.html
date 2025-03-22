@@ -1,0 +1,245 @@
+<html>
+    <head>
+    <title>Donor Registration - Blood Bank Management System</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #ffe6e6;
+            color: #333;
+        }
+        .navbar {
+            overflow: hidden;
+            background-color: #b30000;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            width: 100%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .navbar a:hover {
+            background-color: #990000;
+        }
+        .container {
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .hero {
+            background-color: #ff9999;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        .hero h1 {
+            font-size: 2.5rem;
+            margin: 0;
+        }
+        .form-container {
+            background-color: white;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .form-container h2 {
+            color: #b30000;
+            margin-bottom: 1rem;
+        }
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .form-group button {
+            background-color: #b30000;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .form-group button:hover {
+            background-color: #990000;
+        }
+        .footer {
+            background-color: #b30000;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+        .success-message {
+            color: green;
+            display: none;
+        }
+        .error {
+            color: red;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="homepage.html">Home</a>
+        <a href="donorregister.html">Donor's Login</a>
+        <a href="inventory.html">Inventory</a>
+        <a href="recipientregister.html">Recipient's Login</a>
+        <a href="aboutus.html">About Us</a>
+        <a href="contactus.html">Contact Us</a>
+    </div>
+
+    <div class="hero">
+        <h1>Donor Registration</h1>
+        <p>Register to donate blood and save lives.</p>
+    </div>
+
+    <div class="container">
+        <div class="form-container">
+            <h2>Register as a Donor</h2>
+            <form id="registrationForm">
+                <div class="form-group">
+                    <label for="full-name">Full Name:</label>
+                    <input type="text" id="full-name" name="full_name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="address">Address:</label>
+                    <textarea id="address" name="address" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="contact-number">Contact Number:</label>
+                    <input type="tel" id="contact-number" name="contact_number" required>
+                </div>
+                <div class="form-group">
+                    <label for="city">City:</label>
+                    <input type="text" id="city" name="city" required>
+                </div>
+                <div class="form-group">
+                    <label for="state">State:</label>
+                    <input type="text" id="state" name="state" required>
+                </div>
+                <div class="form-group">
+                    <label for="blood-type">Blood Group:</label>
+                    <select id="blood-type" name="blood_type" required>
+                        <option value="A+">A+</option>
+                        <option value="A-">A-</option>
+                        <option value="B+">B+</option>
+                        <option value="B-">B-</option>
+                        <option value="O+">O+</option>
+                        <option value="O-">O-</option>
+                        <option value="AB+">AB+</option>
+                        <option value="AB-">AB-</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="haemoglobin">Haemoglobin Level (g/dL):</label>
+                    <input type="text" id="haemoglobin" name="haemoglobin">
+                </div>
+                <div class="form-group">
+                    <label for="bs">Blood Sugar Level (mg/dL):</label>
+                    <input type="text" id="bs" name="bs">
+                </div>
+                <div class="form-group">
+                    <label for="bp">Blood Pressure Level (mm/Hg):</label>
+                    <input type="text" id="bp" name="bp">
+                </div>
+                <div class="form-group">
+                    <label for="rbc">RBC Count (million/µL):</label>
+                    <input type="text" id="rbc" name="rbc">
+                </div>
+                <div class="form-group">
+                    <label for="wbc">WBC Count (million/µL):</label>
+                    <input type="text" id="wbc" name="wbc">
+                </div>
+                <div class="form-group">
+                    <label for="plasma">Plasma Count (in %):</label>
+                    <input type="text" id="plasma" name="plasma">
+                </div>
+                <div class="form-group">
+                    <label for="water">Water Content (in %):</label>
+                    <input type="text" id="water" name="water">
+                </div>
+                <div class="form-group">
+                    <label for="std">STD if any:</label>
+                    <select id="std" name="std">
+                        <option value="Positive">Positive</option>
+                        <option value="Negative">Negative</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="age">Age:</label>
+                    <input type="number" id="age" name="age" min="16" max="50" required>
+                </div>
+                <div class="form-group">
+                    <label for="medical-history">Past Medical History:</label>
+                    <textarea id="medical-history" name="medical_history" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                    <button type="submit">Register</button>
+                </div>
+            </form>
+            <p id="success-message" class="success-message">Registration successful! Thank you for registering as a donor.</p>
+            <p id="error-message" class="error">Age must be between 16 and 50.</p>
+        </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2024 Blood Bank Management System. All rights reserved.
+    </div>
+
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', function(event) {
+            event.preventDefault(); 
+
+            const age = document.getElementById('age').value;
+            const errorMessage = document.getElementById('error-message');
+            const successMessage = document.getElementById('success-message');
+
+            if (age < 16 || age > 50) {
+                errorMessage.style.display = 'block';
+                successMessage.style.display = 'none';
+            } else {
+                errorMessage.style.display = 'none';
+                successMessage.style.display = 'block';
+
+                // Gather form data
+                const formData = new FormData(this);
+                const donorData = {};
+                formData.forEach((value, key) => donorData[key] = value);
+
+            
+                let donors = JSON.parse(localStorage.getItem('donors')) || [];
+                donors.push(donorData);
+                localStorage.setItem('donors', JSON.stringify(donors));
+
+                
+                this.reset();
+            }
+        });
+    </script>
+</body>
+</html>
